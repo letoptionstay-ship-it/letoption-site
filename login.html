@@ -1,62 +1,142 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Log In or Sign Up | LetOption</title><meta name="description" content="Log in or create a LetOption account to manage your bookings."><link rel="stylesheet" href="styles.css"></head><body>
-<header class="nav"><a class="brand" href="index.html"><span>LETOPTION<small>PROPERTY MANAGEMENT</small></span></a><nav class="nav-links"><a href="apartments.html">Homes</a><a href="services.html">Services</a><a href="landlords.html">For Landlords</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav><div class="nav-actions"><a class="btn" href="apartments.html">Book Your Stay</a><span class="menu">☰</span></div></header>
 
-<main>
-<section class="section"><div class="container auth-wrap">
+<div class="auth-page">
 
-<div class="auth-tabs">
-  <div class="auth-tab active" data-tab="login">Log In</div>
-  <div class="auth-tab" data-tab="signup">Sign Up</div>
+<div class="auth-hero">
+  <img src="canary-wharf-skyline.png" alt="London skyline at dusk">
+  <div class="auth-hero-content">
+    <div class="auth-brand">LET<span class="accent">O</span>PTION<small>PROPERTY MANAGEMENT</small></div>
+    <div>
+      <h1 class="auth-headline">Welcome to Let<span class="accent">Option</span></h1>
+      <p class="auth-sub">Discover exceptional properties, seamless bookings, and outstanding management — all in one place.</p>
+    </div>
+    <div class="auth-trust">
+      <div class="auth-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><div><b>Secure &amp; Trusted</b><span>Your data is safe with enterprise-grade security.</span></div></div>
+      <div class="auth-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg><div><b>Quality Properties</b><span>Handpicked homes in the best neighbourhoods.</span></div></div>
+      <div class="auth-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><div><b>24/7 Support</b><span>We're here to help, anytime you need us.</span></div></div>
+    </div>
+  </div>
 </div>
 
-<div class="auth-error" id="authError"></div>
-<div class="auth-success" id="authSuccess"></div>
+<div class="auth-panel-wrap">
+  <div class="auth-back"><a href="index.html">← Back to Home</a></div>
+  <div class="auth-panel-body">
+    <div class="auth-form-area">
 
-<!-- LOG IN -->
-<div class="auth-panel active" data-panel="login">
-<div class="form-card">
-<h2 style="margin-top:0;font-size:26px">Welcome back</h2>
-<form id="loginForm">
-<div class="field"><label>Email</label><input type="email" id="loginEmail" required autocomplete="email"></div><br>
-<div class="field"><label>Password</label><input type="password" id="loginPassword" required autocomplete="current-password"></div><br>
-<button class="btn gold" type="submit" style="width:100%" id="loginSubmit">Log in</button>
-</form>
+      <div class="auth-tabs2">
+        <div class="auth-tab2 active" data-tab="login">Sign In</div>
+        <div class="auth-tab2" data-tab="signup">Create Account</div>
+      </div>
+
+      <div class="auth-error" id="authError"></div>
+      <div class="auth-success" id="authSuccess"></div>
+
+      <!-- LOG IN -->
+      <div class="auth-panel2 active" data-panel="login">
+        <h2 class="auth-title">Welcome back</h2>
+        <p class="auth-subtitle">Sign in to continue to your account</p>
+        <form id="loginForm">
+          <div class="auth-input-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+            <input type="email" id="loginEmail" placeholder="Email address" required autocomplete="email">
+          </div>
+          <div class="auth-input-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 1 1 8 0v3"/></svg>
+            <input type="password" id="loginPassword" placeholder="Password" required autocomplete="current-password">
+            <button type="button" class="auth-eye" data-toggle="loginPassword"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          </div>
+          <div class="auth-row-between">
+            <label class="auth-remember"><input type="checkbox"> Remember me</label>
+            <a class="auth-forgot" href="contact.html">Forgot password?</a>
+          </div>
+          <button class="btn" type="submit" style="width:100%" id="loginSubmit">Sign In</button>
+        </form>
+
+        <p class="auth-switch">Don't have an account? <a data-switch="signup">Sign up</a></p>
+      </div>
+
+      <!-- SIGN UP -->
+      <div class="auth-panel2" data-panel="signup">
+        <h2 class="auth-title">Create an account</h2>
+        <p class="auth-subtitle">Join LetOption and get started</p>
+        <form id="signupForm">
+          <div class="auth-input-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <input type="text" id="signupName" placeholder="Full name" required autocomplete="name">
+          </div>
+          <div class="auth-input-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+            <input type="email" id="signupEmail" placeholder="Email address" required autocomplete="email">
+          </div>
+          <div class="auth-input-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 1 1 8 0v3"/></svg>
+            <input type="password" id="signupPassword" placeholder="Password" required minlength="6" autocomplete="new-password">
+            <button type="button" class="auth-eye" data-toggle="signupPassword"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          </div>
+          <div class="auth-input-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 1 1 8 0v3"/></svg>
+            <input type="password" id="signupConfirm" placeholder="Confirm password" required minlength="6" autocomplete="new-password">
+            <button type="button" class="auth-eye" data-toggle="signupConfirm"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          </div>
+
+          <p style="font-size:13px;color:var(--muted);margin:2px 0 16px">or sign up as</p>
+          <div class="auth-role-row">
+            <button type="button" class="auth-role-btn selected" data-role="guest"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>I'm a Guest</button>
+            <button type="button" class="auth-role-btn" data-role="landlord"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/></svg>I'm a Landlord</button>
+          </div>
+
+          <div class="auth-terms">
+            <input type="checkbox" id="signupTerms" required>
+            <label for="signupTerms">I agree to the <a href="house-rules.html">Terms of Service</a> and <a href="contact.html">Privacy Policy</a></label>
+          </div>
+
+          <button class="btn gold" type="submit" style="width:100%" id="signupSubmit">Sign Up</button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a data-switch="login">Sign in</a></p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="auth-features">
+    <div class="auth-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><div><b>Verified Properties</b><span>All properties are verified for your peace of mind.</span></div></div>
+    <div class="auth-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9-6.2-3.3-6.2 3.3 1.2-6.9-5-4.9 6.9-1Z"/></svg><div><b>Best Price Guarantee</b><span>Get the best rates when you book directly with us.</span></div></div>
+    <div class="auth-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><div><b>Flexible Bookings</b><span>Easy booking, reschedule or cancel with ease.</span></div></div>
+    <div class="auth-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 1 1 8 0v3"/></svg><div><b>Secure Payments</b><span>Your payments are protected with bank-level security.</span></div></div>
+  </div>
+
 </div>
 </div>
-
-<!-- SIGN UP -->
-<div class="auth-panel" data-panel="signup">
-<div class="form-card">
-<h2 style="margin-top:0;font-size:26px">Create your account</h2>
-<form id="signupForm">
-<div class="field"><label>Full name</label><input type="text" id="signupName" required autocomplete="name"></div><br>
-<div class="field"><label>Email</label><input type="email" id="signupEmail" required autocomplete="email"></div><br>
-<div class="field"><label>Password</label><input type="password" id="signupPassword" required minlength="6" autocomplete="new-password"></div><br>
-<p class="muted" style="font-size:12px;margin:6px 0 16px">Must be at least 6 characters.</p>
-<button class="btn gold" type="submit" style="width:100%" id="signupSubmit">Create account</button>
-</form>
-</div>
-</div>
-
-</div></section>
-</main>
-
-<footer class="footer"><div class="container footer-grid"><div><div class="brand"><span>LETOPTION<small>PROPERTY MANAGEMENT</small></span></div><p>Premium serviced apartments and hands-free property management across London.</p></div><div><h4>Company</h4><p><a href="about.html">About Us</a></p><p><a href="services.html">Services</a></p><p><a href="contact.html">Contact</a></p></div><div><h4>For Guests</h4><p><a href="apartments.html">Book Now</a></p><p><a href="payment.html">Payments &amp; Booking</a></p><p><a href="cancellation.html">Cancellation Policy</a></p><p><a href="house-rules.html">House Rules</a></p></div><div><h4>Contact</h4><p>hello@letoption.co.uk</p><p>London, United Kingdom</p></div></div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-client.js"></script>
-<script src="auth.js"></script>
-<script src="script.js"></script>
 <script>
-// Tab switching
-document.querySelectorAll('.auth-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.querySelector(`.auth-panel[data-panel="${tab.dataset.tab}"]`).classList.add('active');
-    document.getElementById('authError').classList.remove('visible');
-    document.getElementById('authSuccess').classList.remove('visible');
+// Tab switching (both tab clicks and inline "Sign up"/"Sign in" links)
+function activateTab(name) {
+  document.querySelectorAll('.auth-tab2').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.auth-panel2').forEach(p => p.classList.toggle('active', p.dataset.panel === name));
+  document.getElementById('authError').classList.remove('visible');
+  document.getElementById('authSuccess').classList.remove('visible');
+}
+document.querySelectorAll('.auth-tab2').forEach(tab => tab.addEventListener('click', () => activateTab(tab.dataset.tab)));
+document.querySelectorAll('[data-switch]').forEach(link => link.addEventListener('click', () => activateTab(link.dataset.switch)));
+
+// Password show/hide toggles
+document.querySelectorAll('.auth-eye').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const input = document.getElementById(btn.dataset.toggle);
+    input.type = input.type === 'password' ? 'text' : 'password';
+  });
+});
+
+// Guest / Landlord role selector
+let selectedRole = 'guest';
+document.querySelectorAll('.auth-role-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.auth-role-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedRole = btn.dataset.role;
   });
 });
 
@@ -72,7 +152,6 @@ function showSuccess(msg) {
   el.classList.add('visible');
   document.getElementById('authError').classList.remove('visible');
 }
-
 function getRedirectTarget() {
   const params = new URLSearchParams(window.location.search);
   return params.get('redirect') || 'account.html';
@@ -82,13 +161,13 @@ function getRedirectTarget() {
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const submitBtn = document.getElementById('loginSubmit');
-  submitBtn.disabled = true; submitBtn.textContent = 'Logging in…';
+  submitBtn.disabled = true; submitBtn.textContent = 'Signing in…';
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
 
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-  submitBtn.disabled = false; submitBtn.textContent = 'Log in';
+  submitBtn.disabled = false; submitBtn.textContent = 'Sign In';
   if (error) {
     showError(error.message === 'Invalid login credentials'
       ? 'Incorrect email or password. Please try again.'
@@ -101,30 +180,34 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 // SIGN UP
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
   e.preventDefault();
+  const password = document.getElementById('signupPassword').value;
+  const confirm = document.getElementById('signupConfirm').value;
+  if (password !== confirm) {
+    showError('Passwords do not match.');
+    return;
+  }
+
   const submitBtn = document.getElementById('signupSubmit');
   submitBtn.disabled = true; submitBtn.textContent = 'Creating account…';
   const full_name = document.getElementById('signupName').value.trim();
   const email = document.getElementById('signupEmail').value.trim();
-  const password = document.getElementById('signupPassword').value;
 
   const { data, error } = await supabase.auth.signUp({
     email, password,
-    options: { data: { full_name, role: 'guest' } }
+    options: { data: { full_name, role: selectedRole } }
   });
 
-  submitBtn.disabled = false; submitBtn.textContent = 'Create account';
+  submitBtn.disabled = false; submitBtn.textContent = 'Sign Up';
   if (error) {
     showError(error.message);
     return;
   }
 
   if (data.session) {
-    // Email confirmation is off — logged in immediately
     window.location.href = getRedirectTarget();
   } else {
-    // Email confirmation is on — ask them to check their inbox
-    showSuccess('Account created! Please check your email to confirm your address, then log in.');
-    document.querySelector('.auth-tab[data-tab="login"]').click();
+    showSuccess('Account created! Please check your email to confirm your address, then sign in.');
+    activateTab('login');
   }
 });
 </script>
