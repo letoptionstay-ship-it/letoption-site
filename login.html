@@ -219,7 +219,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
   } catch (err) {
     submitBtn.disabled = false; submitBtn.textContent = 'Sign Up';
     console.error('LetOption signup error:', err);
-    showError('Something went wrong creating your account. Please check your connection and try again.');
+    showError('Debug: ' + (err && err.message ? err.message : JSON.stringify(err)));
   }
 });
 </script>
