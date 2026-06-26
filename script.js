@@ -82,14 +82,9 @@ attachNetlifyForm(document.querySelector('form[name="newsletter"]'), {
   fallbackMessage: "We couldn't sign you up — please try again shortly.",
 });
 
-// Booking request forms on apartment detail pages (no real availability
-// backend yet, so these are submitted as booking enquiries via Netlify
-// Forms rather than instant confirmations).
-document.querySelectorAll('form[data-booking-request]').forEach(form => {
-  attachNetlifyForm(form, {
-    successHTML: '<div class="booking-card"><h3>Request sent</h3><p class="lead">We\'ll confirm availability and send payment details by email shortly. No payment has been taken yet.</p></div>',
-  });
-});
+// Booking request forms on apartment detail pages are now wired to
+// real Supabase bookings via booking-form.js (attachBookingForm()),
+// called individually on each apartment page. Nothing to do here.
 
 const nav = document.querySelector('.nav');
 window.addEventListener('scroll', () => nav && nav.classList.toggle('scrolled', window.scrollY > 10));
