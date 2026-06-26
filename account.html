@@ -50,6 +50,7 @@ function bookingCard(b, isUpcoming) {
 
   const propName = b.properties ? b.properties.name : 'LetOption apartment';
   const propArea = b.properties ? b.properties.area : '';
+  const propImg = b.properties && b.properties.image_url ? b.properties.image_url : 'living-room.jpg';
 
   let cancelBtn = '';
   if (isUpcoming && b.status !== 'cancelled') {
@@ -60,7 +61,7 @@ function bookingCard(b, isUpcoming) {
     }
   }
 
-  return `<div class="card" style="overflow:visible"><div class="card-body" style="padding:22px">
+  return `<div class="card" style="overflow:hidden"><div class="card-img" style="height:140px"><img src="${propImg}" alt="${propName}"></div><div class="card-body" style="padding:22px">
     <div class="area">${propArea}</div>
     <h3 style="margin:6px 0">${propName}</h3>
     <p class="meta" style="margin:0 0 10px">${fmtDate(b.check_in)} → ${fmtDate(b.check_out)} · ${b.guests} guest${b.guests > 1 ? 's' : ''}</p>
