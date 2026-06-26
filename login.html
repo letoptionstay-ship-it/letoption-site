@@ -165,16 +165,22 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
 
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  try {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-  submitBtn.disabled = false; submitBtn.textContent = 'Sign In';
-  if (error) {
-    showError(error.message === 'Invalid login credentials'
-      ? 'Incorrect email or password. Please try again.'
-      : error.message);
-    return;
+    submitBtn.disabled = false; submitBtn.textContent = 'Sign In';
+    if (error) {
+      showError(error.message === 'Invalid login credentials'
+        ? 'Incorrect email or password. Please try again.'
+        : error.message);
+      return;
+    }
+    window.location.href = getRedirectTarget();
+  } catch (err) {
+    submitBtn.disabled = false; submitBtn.textContent = 'Sign In';
+    console.error('LetOption login error:', err);
+    showError('Something went wrong signing in. Please check your connection and try again.');
   }
-  window.location.href = getRedirectTarget();
 });
 
 // SIGN UP
@@ -192,22 +198,28 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
   const full_name = document.getElementById('signupName').value.trim();
   const email = document.getElementById('signupEmail').value.trim();
 
-  const { data, error } = await supabase.auth.signUp({
-    email, password,
-    options: { data: { full_name, role: selectedRole } }
-  });
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email, password,
+      options: { data: { full_name, role: selectedRole } }
+    });
 
-  submitBtn.disabled = false; submitBtn.textContent = 'Sign Up';
-  if (error) {
-    showError(error.message);
-    return;
-  }
+    submitBtn.disabled = false; submitBtn.textContent = 'Sign Up';
+    if (error) {
+      showError(error.message);
+      return;
+    }
 
-  if (data.session) {
-    window.location.href = getRedirectTarget();
-  } else {
-    showSuccess('Account created! Please check your email to confirm your address, then sign in.');
-    activateTab('login');
+    if (data.session) {
+      window.location.href = getRedirectTarget();
+    } else {
+      showSuccess('Account created! Please check your email to confirm your address, then sign in.');
+      activateTab('login');
+    }
+  } catch (err) {
+    submitBtn.disabled = false; submitBtn.textContent = 'Sign Up';
+    console.error('LetOption signup error:', err);
+    showError('Something went wrong creating your account. Please check your connection and try again.');
   }
 });
 </script>
