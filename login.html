@@ -1,0 +1,131 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Log In or Sign Up | LetOption</title><meta name="description" content="Log in or create a LetOption account to manage your bookings."><link rel="stylesheet" href="styles.css"></head><body>
+<header class="nav"><a class="brand" href="index.html"><span>LETOPTION<small>PROPERTY MANAGEMENT</small></span></a><nav class="nav-links"><a href="apartments.html">Homes</a><a href="services.html">Services</a><a href="landlords.html">For Landlords</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav><div class="nav-actions"><a class="btn" href="apartments.html">Book Your Stay</a><span class="menu">☰</span></div></header>
+
+<main>
+<section class="section"><div class="container auth-wrap">
+
+<div class="auth-tabs">
+  <div class="auth-tab active" data-tab="login">Log In</div>
+  <div class="auth-tab" data-tab="signup">Sign Up</div>
+</div>
+
+<div class="auth-error" id="authError"></div>
+<div class="auth-success" id="authSuccess"></div>
+
+<!-- LOG IN -->
+<div class="auth-panel active" data-panel="login">
+<div class="form-card">
+<h2 style="margin-top:0;font-size:26px">Welcome back</h2>
+<form id="loginForm">
+<div class="field"><label>Email</label><input type="email" id="loginEmail" required autocomplete="email"></div><br>
+<div class="field"><label>Password</label><input type="password" id="loginPassword" required autocomplete="current-password"></div><br>
+<button class="btn gold" type="submit" style="width:100%" id="loginSubmit">Log in</button>
+</form>
+</div>
+</div>
+
+<!-- SIGN UP -->
+<div class="auth-panel" data-panel="signup">
+<div class="form-card">
+<h2 style="margin-top:0;font-size:26px">Create your account</h2>
+<form id="signupForm">
+<div class="field"><label>Full name</label><input type="text" id="signupName" required autocomplete="name"></div><br>
+<div class="field"><label>Email</label><input type="email" id="signupEmail" required autocomplete="email"></div><br>
+<div class="field"><label>Password</label><input type="password" id="signupPassword" required minlength="6" autocomplete="new-password"></div><br>
+<p class="muted" style="font-size:12px;margin:6px 0 16px">Must be at least 6 characters.</p>
+<button class="btn gold" type="submit" style="width:100%" id="signupSubmit">Create account</button>
+</form>
+</div>
+</div>
+
+</div></section>
+</main>
+
+<footer class="footer"><div class="container footer-grid"><div><div class="brand"><span>LETOPTION<small>PROPERTY MANAGEMENT</small></span></div><p>Premium serviced apartments and hands-free property management across London.</p></div><div><h4>Company</h4><p><a href="about.html">About Us</a></p><p><a href="services.html">Services</a></p><p><a href="contact.html">Contact</a></p></div><div><h4>For Guests</h4><p><a href="apartments.html">Book Now</a></p><p><a href="payment.html">Payments &amp; Booking</a></p><p><a href="cancellation.html">Cancellation Policy</a></p><p><a href="house-rules.html">House Rules</a></p></div><div><h4>Contact</h4><p>hello@letoption.co.uk</p><p>London, United Kingdom</p></div></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-client.js"></script>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+<script>
+// Tab switching
+document.querySelectorAll('.auth-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelector(`.auth-panel[data-panel="${tab.dataset.tab}"]`).classList.add('active');
+    document.getElementById('authError').classList.remove('visible');
+    document.getElementById('authSuccess').classList.remove('visible');
+  });
+});
+
+function showError(msg) {
+  const el = document.getElementById('authError');
+  el.textContent = msg;
+  el.classList.add('visible');
+  document.getElementById('authSuccess').classList.remove('visible');
+}
+function showSuccess(msg) {
+  const el = document.getElementById('authSuccess');
+  el.textContent = msg;
+  el.classList.add('visible');
+  document.getElementById('authError').classList.remove('visible');
+}
+
+function getRedirectTarget() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('redirect') || 'account.html';
+}
+
+// LOG IN
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = document.getElementById('loginSubmit');
+  submitBtn.disabled = true; submitBtn.textContent = 'Logging in…';
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+  submitBtn.disabled = false; submitBtn.textContent = 'Log in';
+  if (error) {
+    showError(error.message === 'Invalid login credentials'
+      ? 'Incorrect email or password. Please try again.'
+      : error.message);
+    return;
+  }
+  window.location.href = getRedirectTarget();
+});
+
+// SIGN UP
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = document.getElementById('signupSubmit');
+  submitBtn.disabled = true; submitBtn.textContent = 'Creating account…';
+  const full_name = document.getElementById('signupName').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const password = document.getElementById('signupPassword').value;
+
+  const { data, error } = await supabase.auth.signUp({
+    email, password,
+    options: { data: { full_name, role: 'guest' } }
+  });
+
+  submitBtn.disabled = false; submitBtn.textContent = 'Create account';
+  if (error) {
+    showError(error.message);
+    return;
+  }
+
+  if (data.session) {
+    // Email confirmation is off — logged in immediately
+    window.location.href = getRedirectTarget();
+  } else {
+    // Email confirmation is on — ask them to check their inbox
+    showSuccess('Account created! Please check your email to confirm your address, then log in.');
+    document.querySelector('.auth-tab[data-tab="login"]').click();
+  }
+});
+</script>
+</body></html>

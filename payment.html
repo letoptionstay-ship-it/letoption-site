@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Payments &amp; Booking | LetOption</title><meta name="description" content="How payment works when you book a LetOption managed apartment — secure checkout, accepted cards, deposits and cancellation terms."><link rel="stylesheet" href="styles.css"></head><body>
+<header class="nav"><a class="brand" href="index.html"><span>LETOPTION<small>PROPERTY MANAGEMENT</small></span></a><nav class="nav-links"><a href="apartments.html">Homes</a><a href="services.html">Services</a><a href="landlords.html">For Landlords</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav><div class="nav-actions"><a class="btn" href="apartments.html">Book Your Stay</a><span class="menu">☰</span></div></header>
+
+<main>
+<section class="page-hero"><div class="container"><div class="eyebrow">Payments</div><h1>Secure, straightforward payment.</h1><p class="lead">Here's exactly how paying for a LetOption managed stay works, from reservation to check-in.</p></div></section>
+
+<section class="section" style="padding-top:0"><div class="container split">
+<div class="panel">
+<div class="eyebrow">How it works</div>
+<h2>From booking to check-in</h2>
+<ol class="pay-steps">
+<li><b>Reserve your dates.</b> Submit a booking request for the apartment and dates you want — this does not charge your card.</li>
+<li><b>We confirm availability.</b> A LetOption coordinator checks the calendar and confirms your stay by email, usually within a few hours.</li>
+<li><b>Secure payment link.</b> Once confirmed, we send a secure checkout link. Card details are entered directly into our PCI-compliant payment processor — LetOption never sees or stores full card numbers.</li>
+<li><b>Booking confirmed.</b> Your payment is processed, you receive a receipt and check-in instructions, and the apartment is yours.</li>
+</ol>
+<div class="secure-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/></svg> 256-bit encrypted checkout</div>
+</div>
+<div class="landlord-img"><img src="assets/booking-dashboard.png" alt="Secure booking and payment overview"></div>
+</div></section>
+
+<section class="section"><div class="container"><div class="section-head"><h2>Good to know</h2></div><div class="cards" style="grid-template-columns:repeat(3,1fr)">
+<div class="card"><div class="card-body"><h3>Accepted cards</h3><p>Visa, Mastercard and Amex are accepted. Apple Pay and Google Pay are supported at checkout where available.</p><div class="card-brands"><span>VISA</span><span>MC</span><span>AMEX</span></div></div></div>
+<div class="card"><div class="card-body"><h3>Deposits &amp; balance</h3><p>Stays under 28 nights are charged in full at confirmation. Medium-term stays (1–6 months) take a deposit plus first month upfront, with the remainder billed monthly.</p></div></div>
+<div class="card"><div class="card-body"><h3>Cancellations &amp; refunds</h3><p>Refund eligibility depends on the listing's cancellation policy, shown at checkout before you pay. See our <a class="link" href="cancellation.html">Cancellation Policy</a> for full terms.</p></div></div>
+</div></div></section>
+
+<section class="section" id="demo-checkout"><div class="container">
+<div class="section-head"><h2>Checkout preview</h2></div>
+<div class="demo-banner"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#967036" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span><b>Demo only —</b> this preview shows what secure checkout looks like once your stay is confirmed. No real payment is processed and no card details are stored or transmitted; this form does not submit anywhere.</span></div>
+
+<div class="split">
+<div class="form-card">
+<h3 style="margin-top:0">Card details</h3>
+<form id="demoCheckout" onsubmit="return false">
+<div class="field"><label>Name on card</label><input type="text" placeholder="A. Sample" autocomplete="off"></div><br>
+<div class="field card-input-wrap"><label>Card number</label><input type="text" placeholder="4242 4242 4242 4242" inputmode="numeric" maxlength="19" autocomplete="off" id="demoCardNumber"><div class="card-brands"><span>VISA</span><span>MC</span><span>AMEX</span></div></div><br>
+<div class="split-pay"><div class="field"><label>Expiry</label><input type="text" placeholder="MM / YY" maxlength="7" autocomplete="off"></div><div class="field"><label>Security code</label><input type="text" placeholder="CVC" maxlength="4" autocomplete="off"></div></div><br>
+<div class="field"><label>Billing postcode</label><input type="text" placeholder="E14 5AB" autocomplete="off"></div><br>
+<button class="btn gold" type="submit" style="width:100%">Pay £540.00 (demo)</button>
+<p class="muted" style="font-size:12px;margin-top:10px;text-align:center">This is a non-functional preview. Real checkout opens in our payment processor's secure hosted page.</p>
+</form>
+</div>
+
+<div class="booking-card" style="position:static">
+<h3 style="margin-top:0">Order summary</h3>
+<div style="display:flex;justify-content:space-between;margin:14px 0"><span class="muted">Skyline View Apartment</span><span>3 nights</span></div>
+<div style="display:flex;justify-content:space-between;margin:14px 0"><span class="muted">£180 × 3 nights</span><span>£540.00</span></div>
+<div style="display:flex;justify-content:space-between;margin:14px 0"><span class="muted">Cleaning fee</span><span>£0.00</span></div>
+<div style="border-top:1px solid var(--line);margin:16px 0"></div>
+<div style="display:flex;justify-content:space-between;font-weight:700;font-size:18px"><span>Total due now</span><span>£540.00</span></div>
+<div class="secure-badge" style="margin-top:18px"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/></svg> Payments encrypted &amp; PCI-compliant</div>
+</div>
+</div>
+</div></section>
+
+<section class="section"><div class="container" style="text-align:center;max-width:620px;margin:auto"><h2 style="font-size:32px;letter-spacing:-1px">Ready to book?</h2><p class="lead" style="margin:14px auto 26px">Browse available homes and submit a booking request — we'll confirm availability and send your secure payment link by email.</p><a class="btn gold" href="apartments.html">Browse Homes</a></div></section>
+
+</main>
+<footer class="footer"><div class="container footer-grid"><div><div class="brand"><span>LETOPTION<small>PROPERTY MANAGEMENT</small></span></div><p>Premium serviced apartments and hands-free property management across London.</p></div><div><h4>Company</h4><p><a href="about.html">About Us</a></p><p><a href="services.html">Services</a></p><p><a href="contact.html">Contact</a></p></div><div><h4>For Guests</h4><p><a href="apartments.html">Book Now</a></p><p><a href="payment.html">Payments &amp; Booking</a></p><p><a href="cancellation.html">Cancellation Policy</a></p><p><a href="house-rules.html">House Rules</a></p></div><div><h4>Contact</h4><p>hello@letoption.co.uk</p><p>London, United Kingdom</p></div></div></footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-client.js"></script><script src="auth.js"></script><script src="script.js"></script>
+<script>
+const cn = document.querySelector('#demoCardNumber');
+if (cn) {
+  cn.addEventListener('input', () => {
+    let v = cn.value.replace(/\D/g,'').slice(0,16);
+    cn.value = v.replace(/(.{4})/g,'$1 ').trim();
+  });
+}
+</script>
+</body></html>

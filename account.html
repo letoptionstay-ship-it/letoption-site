@@ -1,0 +1,123 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>My Account | LetOption</title><link rel="stylesheet" href="styles.css"></head><body>
+<header class="nav"><a class="brand" href="index.html"><span>LETOPTION<small>PROPERTY MANAGEMENT</small></span></a><nav class="nav-links"><a href="apartments.html">Homes</a><a href="services.html">Services</a><a href="landlords.html">For Landlords</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav><div class="nav-actions"><a class="btn" href="apartments.html">Book Your Stay</a><span class="menu">☰</span></div></header>
+
+<main>
+<section class="page-hero"><div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px">
+<div><div class="eyebrow">My Account</div><h1 class="redefine-heading" style="font-size:clamp(32px,4vw,46px);margin:6px 0 0" id="welcomeName">Welcome back</h1></div>
+<button class="btn ghost" id="signOutBtn">Sign out</button>
+</div></section>
+
+<section class="section" style="padding-top:0"><div class="container">
+
+<div id="loadingState" style="text-align:center;padding:60px 0;color:#777">Loading your bookings…</div>
+
+<div id="bookingsContent" style="display:none">
+  <div class="section-head"><h2 style="font-size:26px">Upcoming &amp; current stays</h2></div>
+  <div id="upcomingBookings" class="cards" style="grid-template-columns:repeat(2,1fr);margin-bottom:48px"></div>
+  <p id="noUpcoming" class="muted" style="display:none">No upcoming bookings yet. <a class="link" href="apartments.html">Browse homes →</a></p>
+
+  <div class="section-head"><h2 style="font-size:26px">Past stays</h2></div>
+  <div id="pastBookings" class="cards" style="grid-template-columns:repeat(2,1fr)"></div>
+  <p id="noPast" class="muted" style="display:none">No past stays yet.</p>
+</div>
+
+</div></section>
+</main>
+
+<footer class="footer"><div class="container footer-grid"><div><div class="brand"><span>LETOPTION<small>PROPERTY MANAGEMENT</small></span></div><p>Premium serviced apartments and hands-free property management across London.</p></div><div><h4>Company</h4><p><a href="about.html">About Us</a></p><p><a href="services.html">Services</a></p><p><a href="contact.html">Contact</a></p></div><div><h4>For Guests</h4><p><a href="apartments.html">Book Now</a></p><p><a href="payment.html">Payments &amp; Booking</a></p><p><a href="cancellation.html">Cancellation Policy</a></p></div><div><h4>Contact</h4><p>hello@letoption.co.uk</p></div></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-client.js"></script>
+<script src="auth.js"></script>
+<script>
+function fmtDate(d) {
+  return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function daysUntil(dateStr) {
+  const ms = new Date(dateStr) - new Date(new Date().toDateString());
+  return Math.round(ms / 86400000);
+}
+
+function bookingCard(b, isUpcoming) {
+  const canCancel = isUpcoming && b.status !== 'cancelled' && daysUntil(b.check_in) >= 7;
+  const statusLabel = {
+    pending: 'Pending confirmation',
+    confirmed: 'Confirmed',
+    cancelled: 'Cancelled',
+    completed: 'Completed'
+  }[b.status] || b.status;
+  const statusColor = b.status === 'cancelled' ? '#9c2c1f' : (b.status === 'confirmed' ? '#2f6b27' : '#967036');
+
+  const propName = b.properties ? b.properties.name : 'LetOption apartment';
+  const propArea = b.properties ? b.properties.area : '';
+
+  let cancelBtn = '';
+  if (isUpcoming && b.status !== 'cancelled') {
+    if (canCancel) {
+      cancelBtn = `<button class="btn ghost" style="margin-top:14px;width:100%" onclick="cancelBooking('${b.id}')">Cancel booking</button>`;
+    } else {
+      cancelBtn = `<p class="muted" style="font-size:12px;margin-top:14px">Cancellation window has passed (must cancel 7+ days before check-in).</p>`;
+    }
+  }
+
+  return `<div class="card" style="overflow:visible"><div class="card-body" style="padding:22px">
+    <div class="area">${propArea}</div>
+    <h3 style="margin:6px 0">${propName}</h3>
+    <p class="meta" style="margin:0 0 10px">${fmtDate(b.check_in)} → ${fmtDate(b.check_out)} · ${b.guests} guest${b.guests > 1 ? 's' : ''}</p>
+    <p style="font-weight:700;color:${statusColor};font-size:13px;letter-spacing:.3px;margin:0">${statusLabel.toUpperCase()}</p>
+    <p class="price" style="margin-top:10px">£${Number(b.total_price).toFixed(2)} total</p>
+    ${cancelBtn}
+  </div></div>`;
+}
+
+async function cancelBooking(id) {
+  if (!confirm('Cancel this booking? This cannot be undone.')) return;
+  const { error } = await supabase.rpc('cancel_booking', { booking_id: id });
+  if (error) {
+    alert('Could not cancel: ' + error.message);
+    return;
+  }
+  loadBookings();
+}
+
+async function loadBookings() {
+  const { data: bookings, error } = await supabase
+    .from('bookings')
+    .select('*, properties(name, area, image_url)')
+    .order('check_in', { ascending: true });
+
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('bookingsContent').style.display = 'block';
+
+  if (error) {
+    document.getElementById('bookingsContent').innerHTML = `<p class="muted">Couldn't load bookings: ${error.message}</p>`;
+    return;
+  }
+
+  const today = new Date().toDateString();
+  const upcoming = (bookings || []).filter(b => new Date(b.check_out) >= new Date(today) && b.status !== 'cancelled');
+  const past = (bookings || []).filter(b => new Date(b.check_out) < new Date(today) || b.status === 'cancelled');
+
+  const upcomingEl = document.getElementById('upcomingBookings');
+  const pastEl = document.getElementById('pastBookings');
+  upcomingEl.innerHTML = upcoming.map(b => bookingCard(b, true)).join('');
+  pastEl.innerHTML = past.map(b => bookingCard(b, false)).join('');
+  document.getElementById('noUpcoming').style.display = upcoming.length ? 'none' : 'block';
+  document.getElementById('noPast').style.display = past.length ? 'none' : 'block';
+}
+
+(async () => {
+  const session = await requireAuth();
+  if (!session) return;
+
+  const { data: profile } = await supabase.from('profiles').select('full_name').eq('id', session.user.id).single();
+  if (profile && profile.full_name) {
+    document.getElementById('welcomeName').textContent = `Welcome back, ${profile.full_name.split(' ')[0]}`;
+  }
+
+  loadBookings();
+})();
+
+document.getElementById('signOutBtn').addEventListener('click', signOut);
+</script>
+</body></html>
