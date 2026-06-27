@@ -112,6 +112,15 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2"></script>
 <script src="supabase-client.js"></script>
 <script>
+// TEMPORARY DIAGNOSTIC #3 — show the raw deployed supabase-client.js source
+fetch('supabase-client.js').then(r => r.text()).then(text => {
+  const diag2 = document.createElement('div');
+  diag2.style = 'position:fixed;top:0;left:0;right:0;background:#222;color:#ff0;font-family:monospace;font-size:10px;padding:10px;z-index:99998;white-space:pre-wrap;max-height:300px;overflow:auto;border-bottom:3px solid red';
+  diag2.textContent = 'DEPLOYED supabase-client.js CONTENT:\n\n' + text;
+  document.body.appendChild(diag2);
+});
+</script>
+<script>
 // TEMPORARY DIAGNOSTIC #2
 window.addEventListener('DOMContentLoaded', () => {
   const diag = document.createElement('div');
