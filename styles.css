@@ -283,3 +283,16 @@ input[type=range]{width:100%;accent-color:var(--gold)}
   .wizard-steps{grid-template-columns:1fr 1fr}
   .footer .newsletter{flex-direction:column}
 }
+
+/* ============================================
+   Reduce gap above "Choose your path" on mobile
+   Desktop spacing untouched.
+   ============================================ */
+@media (max-width: 900px) {
+  .trust-row {
+    margin-bottom: 12px;
+  }
+  .trust-row + .section {
+    padding-top: 16px;
+  }
+}
