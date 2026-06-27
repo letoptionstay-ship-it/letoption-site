@@ -27,7 +27,7 @@
 #homes-preview .card:nth-child(n+2){display:none}
 #neighbourhoods-preview .area-guide:nth-child(n+2){display:none}
 #homes-preview .mobile-view-all,#neighbourhoods-preview .mobile-view-all{display:flex;width:100%;justify-content:center;margin-top:18px}
-#homes-preview .section-head a,#neighbourhoods-preview .section-head a{display:none}
+#homes-preview .section-head a,#neighbourhoods-preview .section-head a,#choose-path .section-head a{display:none}
 .hero{padding:24px 0 16px}
 .hero h1{font-size:clamp(32px,9vw,44px);letter-spacing:-1.5px;line-height:1.08}
 .nav-actions{gap:6px}
@@ -57,19 +57,10 @@
 
 /* Wordmark-only logo refinement */
 .brand span{display:block}.brand small{font-weight:500}.nav .brand{min-width:180px}.footer .brand{margin-bottom:14px}
-.two-path{display:grid;grid-template-columns:1fr 1fr;gap:24px}.path-card{border:1px solid var(--line);border-radius:30px;padding:38px;background:#fff;box-shadow:0 14px 40px rgba(0,0,0,.04)}.path-card h3{font-size:30px;letter-spacing:-1px;margin:10px 0}.upload input[type=file]{display:none}
-@media(max-width:900px){
-.two-path{grid-template-columns:1fr 1fr;gap:10px}
-.nav .brand{min-width:auto}
-.path-card{padding:16px;border-radius:18px;position:relative}
-.path-card h3{font-size:16px;margin:6px 0;font-family:Georgia,"Times New Roman",Times,serif;font-weight:400;letter-spacing:0;line-height:1.2}
-.path-card .lead{font-size:12px;line-height:1.4;margin:0 0 12px}
+.two-path{display:grid;grid-template-columns:1fr 1fr;gap:24px}.path-card{border:1px solid var(--line);border-radius:30px;padding:38px;background:#fff;box-shadow:0 14px 40px rgba(0,0,0,.04)}.path-card h3{font-size:30px;letter-spacing:-1px;margin:10px 0}.upload input[type=file]{display:none}@media(max-width:900px){.two-path{grid-template-columns:1fr 1fr;gap:10px}.nav .brand{min-width:auto}.path-card{padding:16px}.path-card h3{font-size:17px;margin:6px 0;font-family:Georgia,"Times New Roman",Times,serif;font-weight:400;letter-spacing:0;line-height:1.15}
+.path-card .lead{font-size:12.5px;line-height:1.4}
 .path-card .eyebrow{font-size:10px;letter-spacing:1.2px}
-.path-card br{display:none}
 .path-card .btn{font-size:11.5px;padding:9px 10px;width:100%;white-space:nowrap}
-.path-card .eyebrow::after{content:"";position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;background:var(--soft) no-repeat center/16px 16px}
-.path-card[href*="apartments"] .eyebrow::after{background-image:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23967036" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M3 21h18M9 8h1m-1 4h1m-1 4h1m4-8h1m-1 4h1m-1 4h1M5 21V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v16"/%3E%3C/svg%3E')}
-.path-card[href*="landlords"] .eyebrow::after{background-image:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23967036" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M3 12 12 3l9 9M5 10v10h14V10"/%3E%3C/svg%3E')}
 .section h2{font-family:Georgia,"Times New Roman",Times,serif;font-weight:400;letter-spacing:0}
 }
 
@@ -282,17 +273,4 @@ input[type=range]{width:100%;accent-color:var(--gold)}
   .neighbourhood,.neighbourhood:nth-child(1){height:280px}
   .wizard-steps{grid-template-columns:1fr 1fr}
   .footer .newsletter{flex-direction:column}
-}
-
-/* ============================================
-   Reduce gap above "Choose your path" on mobile
-   Desktop spacing untouched.
-   ============================================ */
-@media (max-width: 900px) {
-  .trust-row {
-    margin-bottom: 12px;
-  }
-  .trust-row + .section {
-    padding-top: 16px;
-  }
 }
