@@ -112,6 +112,20 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-client.js"></script>
 <script>
+// TEMPORARY DIAGNOSTIC — remove once the signup issue is found.
+window.addEventListener('DOMContentLoaded', () => {
+  const diag = document.createElement('div');
+  diag.style = 'position:fixed;bottom:0;left:0;right:0;background:#111;color:#0f0;font-family:monospace;font-size:11px;padding:10px;z-index:99999;white-space:pre-wrap;max-height:200px;overflow:auto';
+  diag.textContent =
+    'window.supabase typeof: ' + typeof window.supabase + '\n' +
+    'window.supabase.createClient typeof: ' + (window.supabase ? typeof window.supabase.createClient : 'n/a') + '\n' +
+    'local supabase typeof: ' + typeof supabase + '\n' +
+    'supabase.auth typeof: ' + (typeof supabase !== 'undefined' && supabase ? typeof supabase.auth : 'n/a') + '\n' +
+    'supabase.auth.signUp typeof: ' + (typeof supabase !== 'undefined' && supabase && supabase.auth ? typeof supabase.auth.signUp : 'n/a');
+  document.body.appendChild(diag);
+});
+</script>
+<script>
 // Tab switching (both tab clicks and inline "Sign up"/"Sign in" links)
 function activateTab(name) {
   document.querySelectorAll('.auth-tab2').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
