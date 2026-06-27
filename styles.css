@@ -57,8 +57,10 @@
 
 /* Wordmark-only logo refinement */
 .brand span{display:block}.brand small{font-weight:500}.nav .brand{min-width:180px}.footer .brand{margin-bottom:14px}
-.two-path{display:grid;grid-template-columns:1fr 1fr;gap:24px}.path-card{border:1px solid var(--line);border-radius:30px;padding:38px;background:#fff;box-shadow:0 14px 40px rgba(0,0,0,.04)}.path-card h3{font-size:30px;letter-spacing:-1px;margin:10px 0}.upload input[type=file]{display:none}@media(max-width:900px){.two-path{grid-template-columns:1fr}.nav .brand{min-width:auto}.path-card{padding:22px}.path-card h3{font-size:22px;margin:6px 0;font-family:Georgia,"Times New Roman",Times,serif;font-weight:400;letter-spacing:0;line-height:1.15}
-.path-card .lead{font-size:15px;line-height:1.5}
+.two-path{display:grid;grid-template-columns:1fr 1fr;gap:24px}.path-card{border:1px solid var(--line);border-radius:30px;padding:38px;background:#fff;box-shadow:0 14px 40px rgba(0,0,0,.04)}.path-card h3{font-size:30px;letter-spacing:-1px;margin:10px 0}.upload input[type=file]{display:none}@media(max-width:900px){.two-path{grid-template-columns:1fr 1fr;gap:10px}.nav .brand{min-width:auto}.path-card{padding:16px}.path-card h3{font-size:17px;margin:6px 0;font-family:Georgia,"Times New Roman",Times,serif;font-weight:400;letter-spacing:0;line-height:1.15}
+.path-card .lead{font-size:12.5px;line-height:1.4}
+.path-card .eyebrow{font-size:10px;letter-spacing:1.2px}
+.path-card .btn{font-size:11.5px;padding:9px 10px;width:100%;white-space:nowrap}
 .section h2{font-family:Georgia,"Times New Roman",Times,serif;font-weight:400;letter-spacing:0}
 }
 
