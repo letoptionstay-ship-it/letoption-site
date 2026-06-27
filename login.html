@@ -112,12 +112,19 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2"></script>
 <script src="supabase-client.js"></script>
 <script>
-// TEMPORARY DIAGNOSTIC #3 — show the raw deployed supabase-client.js source
-fetch('supabase-client.js').then(r => r.text()).then(text => {
-  const diag2 = document.createElement('div');
-  diag2.style = 'position:fixed;top:0;left:0;right:0;background:#222;color:#ff0;font-family:monospace;font-size:10px;padding:10px;z-index:99998;white-space:pre-wrap;max-height:300px;overflow:auto;border-bottom:3px solid red';
-  diag2.textContent = 'DEPLOYED supabase-client.js CONTENT:\n\n' + text;
-  document.body.appendChild(diag2);
+// TEMPORARY DIAGNOSTIC #4 — check if THIS RUNNING PAGE'S supabase variable
+// matches what the source code says it should, and check for a stray
+// reassignment between script load and this point.
+window.addEventListener('DOMContentLoaded', () => {
+  const diag3 = document.createElement('div');
+  diag3.style = 'position:fixed;top:0;left:0;right:0;background:#400;color:#fff;font-family:monospace;font-size:11px;padding:10px;z-index:99997;white-space:pre-wrap;max-height:300px;overflow:auto;border-bottom:3px solid yellow';
+  let out = [];
+  out.push('Is local supabase === window.supabase (same object)? ' + (typeof supabase !== 'undefined' && supabase === window.supabase));
+  out.push('supabase.createClient exists on local var? ' + (typeof supabase !== 'undefined' && supabase && typeof supabase.createClient));
+  out.push('Number of script tags on page: ' + document.querySelectorAll('script').length);
+  document.querySelectorAll('script[src]').forEach((s, i) => out.push('  script[' + i + '] src=' + s.src));
+  diag3.textContent = out.join('\n');
+  document.body.appendChild(diag3);
 });
 </script>
 <script>
