@@ -1,0 +1,86 @@
+/* ============================================
+   "Choose your path" — mobile side-by-side fix
+   Scoped to max-width: 767px so desktop layout
+   is completely untouched.
+   ============================================ */
+@media (max-width: 767px) {
+
+  .two-path {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .two-path .path-card {
+    flex: 1 1 0;
+    min-width: 0;          /* critical: lets flex children shrink below content width */
+    width: auto;           /* override any fixed/percentage width set elsewhere for mobile */
+    box-sizing: border-box;
+  }
+
+  /* Shrink text so two cards fit comfortably on a phone screen */
+  .two-path .path-card h3 {
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+
+  .two-path .path-card .eyebrow {
+    font-size: 0.7rem;
+  }
+
+  .two-path .path-card .lead {
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  .two-path .path-card .btn {
+    font-size: 0.85rem;
+    padding: 8px 14px;
+    display: inline-block;
+    white-space: nowrap;
+  }
+}
+
+/* ============================================
+   Booking widget — mobile search button fix
+   Scoped to max-width: 767px, desktop untouched.
+   ============================================ */
+@media (max-width: 767px) {
+
+  .search-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .search-panel .search-cell {
+    width: 100%;
+  }
+
+  .search-panel .search-cell label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+  }
+
+  .search-panel .search-cell select,
+  .search-panel .search-cell input[type="date"] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* The button is a direct child of the form, not a .search-cell,
+     so it needs its own explicit full-width rule */
+  .search-panel > .btn {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    padding: 14px;
+    font-size: 1rem;
+    border-radius: 999px;
+    margin-top: 4px;
+  }
+}
