@@ -46,6 +46,7 @@
 .section{padding:40px 0}
 #choose-path{padding-top:8px}
 .section-head{margin-bottom:20px}
+#choose-path .section-head{margin-bottom:8px}
 }
 @media(max-width:480px){
 .hero h1{font-size:clamp(28px,8.5vw,36px)}
