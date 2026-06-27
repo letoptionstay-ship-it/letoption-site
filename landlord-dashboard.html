@@ -1,0 +1,108 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Landlord Dashboard | LetOption</title><link rel="stylesheet" href="styles.css"></head><body>
+<header class="nav"><a class="brand" href="index.html"><span>LETOPTION<small>PROPERTY MANAGEMENT</small></span></a><nav class="nav-links"><a href="apartments.html">Homes</a><a href="services.html">Services</a><a href="landlords.html">For Landlords</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav><div class="nav-actions"><a class="btn" href="apartments.html">Book Your Stay</a><span class="menu">☰</span></div></header>
+
+<main>
+<section class="page-hero"><div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px">
+<div><div class="eyebrow">Landlord Dashboard</div><h1 class="redefine-heading" style="font-size:clamp(32px,4vw,46px);margin:6px 0 0" id="welcomeName">Welcome back</h1></div>
+<button class="btn ghost" id="signOutBtn">Sign out</button>
+</div></section>
+
+<section class="section" style="padding-top:0"><div class="container">
+
+<div id="loadingState" style="text-align:center;padding:60px 0;color:#777">Loading your portfolio…</div>
+
+<div id="dashboardContent" style="display:none">
+
+  <div class="stat-band" id="overallStats" style="margin-top:0;margin-bottom:48px"></div>
+
+  <div class="section-head"><h2 style="font-size:26px">Your properties</h2></div>
+  <div id="propertiesGrid" class="cards" style="grid-template-columns:repeat(2,1fr)"></div>
+  <p id="noProperties" class="muted" style="display:none">No properties registered yet. <a class="link" href="register.html">Register a property →</a></p>
+
+</div>
+
+</div></section>
+</main>
+
+<footer class="footer"><div class="container footer-grid"><div><div class="brand"><span>LETOPTION<small>PROPERTY MANAGEMENT</small></span></div><p>Premium serviced apartments and hands-free property management across London.</p></div><div><h4>Company</h4><p><a href="about.html">About Us</a></p><p><a href="services.html">Services</a></p><p><a href="contact.html">Contact</a></p></div><div><h4>For Landlords</h4><p><a href="landlords.html">Why LetOption</a></p><p><a href="register.html">Register a Property</a></p></div><div><h4>Contact</h4><p>hello@letoption.co.uk</p></div></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0"></script>
+<script src="supabase-client.js"></script>
+<script src="auth.js"></script>
+<script>
+function fmtMoney(n) {
+  return '£' + Number(n || 0).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function propertyCard(p) {
+  const occupancy = p.occupancy_pct != null ? Math.round(p.occupancy_pct) : 0;
+  const checkins = p.upcoming_checkins || 0;
+
+  return `<div class="card" style="overflow:hidden"><div class="card-img" style="height:170px"><img src="${p.image_url || 'living-room.jpg'}" alt="${p.property_name}"></div><div class="card-body" style="padding:22px">
+    <div class="area">${p.area || ''}</div>
+    <h3 style="margin:6px 0 14px">${p.property_name}</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:6px">
+      <div><div style="font-size:20px;font-weight:700">${occupancy}%</div><div class="muted" style="font-size:11.5px">Occupancy (month)</div></div>
+      <div><div style="font-size:20px;font-weight:700">${checkins}</div><div class="muted" style="font-size:11.5px">Upcoming check-ins</div></div>
+      <div><div style="font-size:20px;font-weight:700">${fmtMoney(p.total_revenue)}</div><div class="muted" style="font-size:11.5px">Total revenue</div></div>
+    </div>
+    <p class="muted" style="font-size:13px;margin-top:10px">${fmtMoney(p.nightly_price)} / night</p>
+  </div></div>`;
+}
+
+function statCard(value, label) {
+  return `<div class="stat-card"><b>${value}</b><span>${label}</span></div>`;
+}
+
+async function loadDashboard() {
+  const { data: rows, error } = await supabase.rpc('get_landlord_dashboard');
+
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('dashboardContent').style.display = 'block';
+
+  if (error) {
+    document.getElementById('dashboardContent').innerHTML = `<p class="muted">Couldn't load your dashboard: ${error.message}</p>`;
+    return;
+  }
+
+  const properties = rows || [];
+  const grid = document.getElementById('propertiesGrid');
+  grid.innerHTML = properties.map(propertyCard).join('');
+  document.getElementById('noProperties').style.display = properties.length ? 'none' : 'block';
+
+  const totalRevenue = properties.reduce((sum, p) => sum + Number(p.total_revenue || 0), 0);
+  const totalCheckins = properties.reduce((sum, p) => sum + Number(p.upcoming_checkins || 0), 0);
+  const avgOccupancy = properties.length
+    ? Math.round(properties.reduce((sum, p) => sum + Number(p.occupancy_pct || 0), 0) / properties.length)
+    : 0;
+
+  document.getElementById('overallStats').innerHTML = [
+    statCard(properties.length, properties.length === 1 ? 'Property' : 'Properties'),
+    statCard(avgOccupancy + '%', 'Average occupancy'),
+    statCard(totalCheckins, 'Upcoming check-ins'),
+    statCard(fmtMoney(totalRevenue), 'Total revenue'),
+  ].join('');
+}
+
+(async () => {
+  const session = await requireAuth();
+  if (!session) return;
+
+  const { data: profile } = await supabase.from('profiles').select('full_name, role').eq('id', session.user.id).single();
+
+  // Guests shouldn't land here — send them to their own account page.
+  if (profile && profile.role !== 'landlord') {
+    window.location.href = 'account.html';
+    return;
+  }
+
+  if (profile && profile.full_name) {
+    document.getElementById('welcomeName').textContent = `Welcome back, ${profile.full_name.split(' ')[0]}`;
+  }
+
+  loadDashboard();
+})();
+
+document.getElementById('signOutBtn').addEventListener('click', signOut);
+</script>
+</body></html>

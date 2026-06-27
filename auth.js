@@ -13,15 +13,25 @@ function ensureLoginLink(navActions) {
   navActions.prepend(loginLink);
 }
 
-function showAccountLink(navActions) {
+async function showAccountLink(navActions, session) {
   const bookBtn = navActions.querySelector('a[href="apartments.html"], a[href="register.html"]');
   const existingLogin = navActions.querySelector('.nav-login-link');
   if (existingLogin) existingLogin.remove();
   if (navActions.querySelector('.nav-account-link')) return;
 
+  let href = 'account.html';
+  try {
+    const { data: profile } = await supabase.from('profiles').select('role').eq('id', session.user.id).single();
+    if (profile && profile.role === 'landlord') {
+      href = 'landlord-dashboard.html';
+    }
+  } catch (err) {
+    console.warn('LetOption auth: could not determine role, defaulting to account.html', err);
+  }
+
   const accountLink = document.createElement('a');
   accountLink.className = 'btn nav-account-link';
-  accountLink.href = 'account.html';
+  accountLink.href = href;
   accountLink.textContent = 'My Account';
   if (bookBtn) {
     bookBtn.replaceWith(accountLink);
@@ -49,7 +59,7 @@ async function updateNavForAuth() {
       return;
     }
     if (session) {
-      showAccountLink(navActions);
+      await showAccountLink(navActions, session);
     }
   } catch (err) {
     console.warn('LetOption auth: updateNavForAuth failed', err);
