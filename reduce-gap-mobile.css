@@ -1,0 +1,18 @@
+/* ============================================
+   Reduce gap above "Choose your path" on mobile
+   Desktop spacing (trust-row margin-bottom:46px,
+   section padding:72px 0) is untouched.
+   ============================================ */
+@media (max-width: 900px) {
+
+  .trust-row {
+    margin-bottom: 12px; /* was 28px on mobile */
+  }
+
+  /* Target only the section that directly follows trust-row,
+     so other .section blocks on the page keep their normal padding */
+  .trust-row + .section {
+    padding-top: 16px; /* was 40px via the general .section rule */
+  }
+
+}
