@@ -23,11 +23,16 @@
 .split-pay{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:900px){.split-pay{grid-template-columns:1fr}}
 .mobile-view-all{display:none}
-@media(max-width:900px){.nav-links{display:none}.menu{display:block}.hero-grid,.detail-grid{grid-template-columns:1fr}.hero-media{height:420px}.search-panel{grid-template-columns:1fr;margin-top:20px}.search-cell{border-right:0;border-bottom:1px solid var(--line)}.cards,.features,.footer-grid,.before-after,.form-grid{grid-template-columns:1fr}.trust-row{flex-direction:row;flex-wrap:wrap;gap:10px 16px;align-items:center;font-size:11.5px;margin-bottom:8px}.section-head{display:block}.gallery{grid-template-columns:1fr}.gallery img,.gallery img:first-child{height:260px}.nav{height:70px;padding:0 16px}.brand{font-size:14px;letter-spacing:2.5px}
+@media(max-width:900px){.nav-links{display:none}.menu{display:block}.hero-grid,.detail-grid{grid-template-columns:1fr}.hero-media{height:420px}.search-panel{grid-template-columns:1fr;margin-top:20px}.search-cell{border-right:0;border-bottom:1px solid var(--line)}.cards,.footer-grid,.before-after,.form-grid{grid-template-columns:1fr}.features{grid-template-columns:1fr 1fr;gap:18px;padding:24px 0}.feature svg{width:20px;height:20px;margin-bottom:8px}.feature h4{font-size:14px;margin:0 0 4px}.feature p{font-size:12px;line-height:1.4}.trust-row{flex-direction:row;flex-wrap:wrap;gap:10px 16px;align-items:center;font-size:11.5px;margin-bottom:8px}.section-head{display:block}.gallery{grid-template-columns:1fr}.gallery img,.gallery img:first-child{height:260px}.nav{height:70px;padding:0 16px}.brand{font-size:14px;letter-spacing:2.5px}
 #homes-preview .card:nth-child(n+2){display:none}
 #neighbourhoods-preview .area-guide:nth-child(n+2){display:none}
 #homes-preview .mobile-view-all,#neighbourhoods-preview .mobile-view-all{display:flex;width:100%;justify-content:center;margin-top:18px}
-#homes-preview .section-head a,#neighbourhoods-preview .section-head a,#choose-path .section-head a{display:none}
+#homes-preview .section-head a,#neighbourhoods-preview .section-head a,#choose-path .section-head a,#guest-reviews .section-head a{display:none}
+#guest-reviews .review-grid{grid-template-columns:1fr 1fr;gap:10px}
+#guest-reviews .review-card:nth-child(n+3){display:none}
+#guest-reviews .review-card{padding:14px;font-size:12px}
+#guest-reviews .review-card p{font-size:12px;line-height:1.4}
+#guest-reviews .stars{font-size:11px;margin-bottom:8px}
 .hero{padding:24px 0 16px}
 .hero h1{font-size:clamp(32px,9vw,44px);letter-spacing:-1.5px;line-height:1.08}
 .nav-actions{gap:6px}
@@ -44,7 +49,8 @@
 .split .btn{font-size:12px;padding:9px 13px;width:100%;margin-top:6px}
 .split-reverse{direction:ltr}
 .section{padding:40px 0}
-#choose-path{padding-top:8px}
+#choose-path{padding-top:20px;padding-bottom:24px}
+#homes-preview{padding-top:24px}
 .section-head{margin-bottom:20px}
 #choose-path .section-head{margin-bottom:8px}
 }
